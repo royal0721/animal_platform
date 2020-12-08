@@ -1,0 +1,75 @@
+<div class="inform_sheet">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="form_sheet" action="">
+  <div id="addr_text">
+      <label>
+      通報地址   
+      </label>
+      </div>
+      <div id="location">
+      <select formControlName="location">
+        <option value=''>縣市</option>
+        <option [value]="country.area" *ngFor="let country of area_data"> {{country.area}} </option>
+      </select>
+    </div>
+      <div id="type_text">
+      <label>
+        動物種類
+      </label>  
+    </div>
+      <div id="animal_type">
+        <label>
+          <input type="radio" name="animal_type" value="貓" [formControl]="userForm.controls['animal_type']">
+          貓
+        </label>
+        <label>
+          <!-- radio 和 checkbox 用法也一樣 -->
+          <input type="radio" name="animal_type" value="狗" [formControl]="userForm.controls['animal_type']">
+          狗
+        </label>
+      </div>
+      <div id="sex_text">
+        <label>
+          動物性別
+        </label>  
+      </div>
+      <div id="sex">
+          <label>
+            <input type="radio" name="sex" value="公" [formControl]="userForm.controls['sex']">
+            公
+          </label>
+          <label>
+            <!-- radio 和 checkbox 用法也一樣 -->
+            <input type="radio" name="sex" value="母" [formControl]="userForm.controls['sex']">
+            母
+          </label>
+          <label>
+            <!-- radio 和 checkbox 用法也一樣 -->
+            <input type="radio" name="sex" value="未知" [formControl]="userForm.controls['sex']">
+            未知
+          </label>
+       </div>
+      <div id="animal_name_text">
+      <label>
+        取名 （若無則填無）   
+      </label></div>   
+      <div id="animal_name">
+        <input type="text" formControlName="animal_name">
+      </div> 
+      <div id="user_name_text">
+      <label>
+      通報者姓名    
+      </label>
+    </div>   
+    <div id="user_name">
+    <input type="text" formControlName="user_name">
+    </div>
+    <button id="confirm_button" type="submit" [disabled]="!userForm.valid" ng-click="refresh($event)">確認通報</button>
+</form>
+</div>
+
+<div *ngFor="let inform of informs" style="margin-top:10px;border-bottom:solid 1px black ;width: 250px;">
+    <p>通報動物： {{inform.sex}}{{inform.animal_type}}</p>
+    <p>姓名： {{inform.animal_name}}</p>
+    <p>通報時間： {{inform.time | date: 'yyyy/MM/dd'}}</p>
+    <p>通報者： {{inform.user_name}}</p>
+</div>

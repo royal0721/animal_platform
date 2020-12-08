@@ -1,0 +1,52 @@
+#form_sheet{
+	display:inline-block; 
+	padding:5px; 
+	width:200px; 
+	height:50px; 
+	text-align:left;
+}
+#addr_text,#type_text,#sex_text,#animal_name_text,#user_name_text{
+	color: #000000;
+	font-weight: 700;
+	padding: 18px 10px ;
+}
+.inform_sheet{
+	border: solid 1px rgb(230, 230, 230);
+	border-radius: 15px;
+	background-color: #F8FBF5;
+	opacity:0.8;
+	filter: blur(0.05px);
+	padding: 20px;
+	width:400px;
+}
+#location,#animal_type,#sex,#animal_name,#user_name{
+	padding:0px 12px;
+}
+.inform_text{
+	padding: 10px;
+	font-size: 20px;
+}
+#confirm_button{
+	width:100%;
+	height:40px;
+	margin: 50px 80px;
+	background-color: rgb(88, 77, 77);
+	border-radius: 5px;
+	color:white;
+	font-size: 20px;
+	cursor: pointer; 
+}  
+#confirm_button:hover{
+	background-color: rgb(121, 113, 113);
+}  
+#confirm_button.active{
+	transform: scale(0.98); 
+	box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); 
+	
+}
+#confirm_button[disabled]{
+	background-color: rgb(173, 173, 173);
+}
+input[radio]:checked{
+	background-color: rgb(117, 117, 117);
+}
