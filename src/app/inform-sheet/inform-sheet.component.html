@@ -6,10 +6,15 @@
       </label>
       </div>
       <div id="location">
-      <select formControlName="location">
+      <select formControlName="location" (change)="getArea($event.target.value)">
         <option value=''>縣市</option>
         <option [value]="country.area" *ngFor="let country of area_data"> {{country.area}} </option>
       </select>
+      <select formControlName="location2">
+        <option value=''>鄉鎮市區</option>
+        <option [value]="zone" *ngFor="let zone of selected_zone"> {{zone}} </option>
+      </select>
+      <input type="text" formControlName="location3" id="location_added" placeholder="輸入路段詳細地址或經緯度">
     </div>
       <div id="type_text">
       <label>
@@ -67,9 +72,3 @@
 </form>
 </div>
 
-<div *ngFor="let inform of informs" style="margin-top:10px;border-bottom:solid 1px black ;width: 250px;">
-    <p>通報動物： {{inform.sex}}{{inform.animal_type}}</p>
-    <p>姓名： {{inform.animal_name}}</p>
-    <p>通報時間： {{inform.time | date: 'yyyy/MM/dd'}}</p>
-    <p>通報者： {{inform.user_name}}</p>
-</div>

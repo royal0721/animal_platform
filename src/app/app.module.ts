@@ -5,11 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InformSheetComponent } from './inform-sheet/inform-sheet.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MapSheetComponent } from './map-sheet/map-sheet.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    InformSheetComponent
+    InformSheetComponent,
+    MapSheetComponent
   ],
   imports: [
     BrowserModule,
