@@ -17,49 +17,82 @@ export class InformSheetComponent implements OnInit {
   selected_area={area:'',zone:[]};
   selected_zone: any[] = [];
   area_data = area_data;
-  constructor(private informSheetService :InformSheetService) { }
+  url;
+  location_text:String;
+
+  constructor(private informSheetService :InformSheetService) {
+
+   }
 
   userForm = new FormGroup({
     user_name: new FormControl('', Validators.nullValidator && Validators.required),
     animal_name: new FormControl('', Validators.nullValidator && Validators.required),
     animal_type:new FormControl('', Validators.nullValidator && Validators.required),
     sex: new FormControl('', Validators.nullValidator && Validators.required),
-    location: new FormControl('', Validators.nullValidator && Validators.required),
-    location2: new FormControl('',Validators.nullValidator && Validators.required),
-    location3: new FormControl('',Validators.nullValidator && Validators.required)
+    location: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    location2: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    location3: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    location4: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required]))
   });
 
   destroy$: Subject<boolean> = new Subject<boolean>();
   
+  // get the address
   ngOnInit(): void {
-    this.informSheetService.getInform().pipe(takeUntil(this.destroy$)).subscribe((informs: any[])=>{
-      console.log(informs);
-      this.informs=informs;
-    })  
   }
     
   onSubmit() {
 
-    this.informSheetService.addInform(this.userForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
+    this.userForm.controls['location'].setValue((<HTMLSelectElement>document.getElementById("location_selector")).value);
+    this.userForm.controls['location2'].setValue((<HTMLSelectElement>document.getElementById("location2_selector")).value);
+    this.userForm.controls['location3'].setValue((<HTMLSelectElement>document.getElementById("location_added_addr")).value);
+    this.userForm.controls['location4'].setValue((<HTMLSelectElement>document.getElementById("location_added_long")).value);
+    console.warn(this.userForm.controls['location2'].value);
+    this.informSheetService.addInform(this.userForm.getRawValue()).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);
       this.userForm.reset();
     });
 
-    console.log('Submit'+this.userForm.value);
-    console.warn(this.userForm.value);
+    console.log('Submit'+this.userForm.getRawValue());
   }
 
   ngOnDestroy() {
+    
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
  
   getArea(id:string){
+
     console.log(id);
     this.selected_area=(this.area_data.find(c => c.area === id));
     this.userForm.controls['location2'].setValue('');
-    this.selected_zone=(this.selected_area.zone);
+    if(this.selected_area){
+      this.selected_zone=(this.selected_area.zone);
+    }else{
+      this.selected_zone=[];
+    }
     console.log(this.selected_zone);
   }
 
+  lat_test(lan:string){
+    var pattern = new RegExp('(/^[+-]?\d+(\.\d+)?$/,/^[+-]?\d+(\.\d+)?$/)');
+    var result=pattern.test(lan);
+    if(result!=false){
+      let control = this.userForm.get('location')
+      control.disable();
+    }
+  }
+
+  onFileChanged(event) {
+    let reader = new FileReader();
+    if(event.target.files && event.target.files.length > 0) {
+      let file = event.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.url = reader.result; 
+        console.log('Submit'+this.userForm.value);
+      };
+    }
+  }
 }

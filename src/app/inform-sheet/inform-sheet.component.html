@@ -2,19 +2,16 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="form_sheet" action="">
   <div id="addr_text">
       <label>
-      通報地址   
+      選擇地圖通報   
       </label>
       </div>
       <div id="location">
-      <select formControlName="location" (change)="getArea($event.target.value)">
-        <option value=''>縣市</option>
-        <option [value]="country.area" *ngFor="let country of area_data"> {{country.area}} </option>
-      </select>
-      <select formControlName="location2">
-        <option value=''>鄉鎮市區</option>
-        <option [value]="zone" *ngFor="let zone of selected_zone"> {{zone}} </option>
-      </select>
-      <input type="text" formControlName="location3" id="location_added" placeholder="輸入路段詳細地址或經緯度">
+      <div id="location_top">
+      <input type="text" formControlName="location"  id="location_selector" placeholder="縣市" disabled="true">
+      <input type="text" formControlName="location2"  id="location2_selector" placeholder="鄉鎮市區" disabled="true">
+      </div>
+      <input type="text" formControlName="location3" id="location_added_addr" placeholder="路段"  disabled="true" >
+      <input type="text" formControlName="location4" id="location_added_long" placeholder="經緯度" (change)="lat_test($event.target.value)" disabled="true" >
     </div>
       <div id="type_text">
       <label>
@@ -58,7 +55,7 @@
         取名 （若無則填無）   
       </label></div>   
       <div id="animal_name">
-        <input type="text" formControlName="animal_name">
+        <input type="text" formControlName="animal_name" >
       </div> 
       <div id="user_name_text">
       <label>
@@ -68,7 +65,14 @@
     <div id="user_name">
     <input type="text" formControlName="user_name">
     </div>
-    <button id="confirm_button" type="submit" [disabled]="!userForm.valid" ng-click="refresh($event)">確認通報</button>
+    <img src={{url}} style="width: 260px;height: auto; margin-top: 40px;border:0.01px #f0f0f0 solid;margin-left: 10px;">
+    <input
+      style="display: none;"
+      type="file" (change)="onFileChanged($event)"
+      #fileInput
+      >
+      <button type="button" (click)="fileInput.click()" style="margin:30px 10px;font-size:18px;padding:5px;color:white;background-color: rgb(105, 105, 105);" >選擇圖片</button>    
+    <button id="confirm_button" type="submit" ng-click="refresh($event)">確認通報</button>
 </form>
 </div>
 
