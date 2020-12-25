@@ -51,6 +51,7 @@ export class InformSheetComponent implements OnInit {
     this.informSheetService.addInform(this.userForm.getRawValue()).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);
       this.userForm.reset();
+      window.location.reload();
     });
 
     console.log('Submit'+this.userForm.getRawValue());

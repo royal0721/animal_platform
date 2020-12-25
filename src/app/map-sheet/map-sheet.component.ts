@@ -39,7 +39,7 @@ export class MapSheetComponent implements OnInit {
       const mapProperties = {
          center: new google.maps.LatLng(25.027714782105257, 121.54356784691174),
          zoom: 13,
-         mapTypeId: google.maps.MapTypeId.ROADMAP
+         mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
     const map = new google.maps.Map(this.gmapElement.nativeElement,    mapProperties);
     const geocoder = new google.maps.Geocoder();     
@@ -65,13 +65,14 @@ export class MapSheetComponent implements OnInit {
       var marker = new google.maps.Marker({
         position: locations[i].latlon,
         map: map,
-        title: "Animal TNR platform",
-        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        title: "未紮",
+        icon: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png",
+        animation: google.maps.Animation.DROP
       });
       var infowindow = new google.maps.InfoWindow();
       infowindow.setContent(locations[i].message.content);
       infowindow.open(map, marker);
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+      google.maps.event.addListener(marker, "mouseover", (function(marker, i) {
         return function() {
           infowindow.setContent(locations[i].message.content);
           infowindow.open(map, marker);
@@ -156,7 +157,7 @@ export class MapSheetComponent implements OnInit {
              position: pos,
              map: map
          });
-         map.setZoom(13);
+         map.setZoom(14);
          map.setCenter(pos);
          marker.addListener("mouseover", () => {
            infowindow.open(map, marker);
