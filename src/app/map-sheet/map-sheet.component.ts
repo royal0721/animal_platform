@@ -62,17 +62,29 @@ export class MapSheetComponent implements OnInit {
   function placeMap(locations){
     for (var i = 0; i < locations.length; i++) {  
       console.log(locations);
+      if(locations[i].message.content.includes("貓")==true){
       var marker = new google.maps.Marker({
         position: locations[i].latlon,
         map: map,
         title: "未紮",
-        icon: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png",
+        icon: "https://raw.githubusercontent.com/royal0721/cat/main/cat%20(1).png",
         animation: google.maps.Animation.DROP
-      });
+      });        
+      }else{
+        var marker = new google.maps.Marker({
+          position: locations[i].latlon,
+          map: map,
+          title: "未紮",
+          icon: "https://raw.githubusercontent.com/royal0721/cat/main/dog%20(2).png",
+          animation: google.maps.Animation.DROP
+        });          
+      }
+
       var infowindow = new google.maps.InfoWindow();
+      console.log(locations[i].message.content+"je");
       infowindow.setContent(locations[i].message.content);
-      infowindow.open(map, marker);
-      google.maps.event.addListener(marker, "mouseover", (function(marker, i) {
+      // infowindow.open(map, marker);
+      google.maps.event.addListener(marker, "click", (function(marker, i) {
         return function() {
           infowindow.setContent(locations[i].message.content);
           infowindow.open(map, marker);
@@ -159,7 +171,7 @@ export class MapSheetComponent implements OnInit {
          });
          map.setZoom(14);
          map.setCenter(pos);
-         marker.addListener("mouseover", () => {
+         marker.addListener("click", () => {
            infowindow.open(map, marker);
          });
          infowindow.open(map, marker);
