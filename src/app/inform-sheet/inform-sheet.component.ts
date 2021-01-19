@@ -47,7 +47,7 @@ export class InformSheetComponent implements OnInit {
     this.userForm.controls['location2'].setValue((<HTMLSelectElement>document.getElementById("location2_selector")).value);
     this.userForm.controls['location3'].setValue((<HTMLSelectElement>document.getElementById("location_added_addr")).value);
     this.userForm.controls['location4'].setValue((<HTMLSelectElement>document.getElementById("location_added_long")).value);
-    console.warn(this.userForm.controls['location2'].value);
+
     this.informSheetService.addInform(this.userForm.getRawValue()).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);
       this.userForm.reset();
