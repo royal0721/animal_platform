@@ -3,6 +3,7 @@ import { InformSheetService } from '../inform-sheet.service';
 import {  takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TokenStorageService } from '../token-storage.service';
 import {area_data} from './area_data'
 
 
@@ -20,12 +21,12 @@ export class InformSheetComponent implements OnInit {
   url;
   location_text:String;
 
-  constructor(private informSheetService :InformSheetService) {
+  constructor(private informSheetService :InformSheetService, private tokenStorage: TokenStorageService) {
 
    }
 
   userForm = new FormGroup({
-    user_name: new FormControl('', Validators.nullValidator && Validators.required),
+    user_name: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
     animal_name: new FormControl('', Validators.nullValidator && Validators.required),
     animal_type:new FormControl('', Validators.nullValidator && Validators.required),
     sex: new FormControl('', Validators.nullValidator && Validators.required),
@@ -39,6 +40,7 @@ export class InformSheetComponent implements OnInit {
   
   // get the address
   ngOnInit(): void {
+    this.userForm.controls['user_name'].setValue(this.tokenStorage.getUser().firstName+" "+this.tokenStorage.getUser().lastName);
   }
     
   onSubmit() {

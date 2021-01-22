@@ -1,1 +1,14 @@
-<p>logout works!</p>
+<div style="	position: absolute;
+left:200px;
+top:10px;
+z-index: 2;
+background-color: rgb(253, 253, 253);
+padding:20px;
+color:rgb(37, 37, 37);
+border-radius: 5px;
+box-shadow: 3px 3px rgb(219, 219, 219);
+">
+<p style="font-weight: bold;">{{firstName}} {{lastName}} 歡迎登入</p>
+<span style="display: flex;">通報者：<p style="color:green;font-weight: bold;"> {{role}}</p></span>
+<button (click)="logout();">登出</button>
+</div>

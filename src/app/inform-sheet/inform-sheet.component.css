@@ -98,3 +98,10 @@ select{
 	border: #f0f0f0 0.05px solid;
 
 }
+input#user_name{
+	background-color: #ffffff;
+	border: 0.05px #f0f0f0 solid;
+	padding: 1px;
+	padding-left: 10px;
+	border-radius: 5px;
+}

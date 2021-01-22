@@ -4,7 +4,7 @@ margin-left: auto;
 margin-right: auto;
 margin-top: 15vh;
 opacity:0.3">
-<div id="form_sheet" style="border-radius:10px;box-shadow:3px 3px rgb(189, 189, 189);position:absolute;top:30%;left:37%;width: 25vw;height:40vh;background-color: #fff;display: block;border: rgb(233, 233, 233) 0.01px solid;">
+<div id="form_sheet" style="border-radius:10px;box-shadow:3px 3px rgb(189, 189, 189);position:absolute;top:30%;left:37%;width: 25vw;height:auto;background-color: #fff;display: block;border: rgb(233, 233, 233) 0.01px solid;">
     <form
       *ngIf="!isLoggedIn"
       name="form"
@@ -53,9 +53,10 @@ opacity:0.3">
           class="alert alert-danger"
           role="alert"
           *ngIf="f.submitted && password.invalid"
+          style="width:65%;margin:5px auto;"
         >
-          <div *ngIf="password.errors.required">請輸入密碼</div>
-          <div *ngIf="password.errors.minlength">
+          <div *ngIf="password.errors.required" >請輸入密碼</div>
+          <div *ngIf="password.errors.minlength" >
             密碼至少需要輸入6碼
           </div>
         </div>
@@ -70,6 +71,7 @@ opacity:0.3">
           class="alert alert-danger"
           role="alert"
           *ngIf="f.submitted && isLoginFailed"
+          style="margin:5px auto;"
         >
           登入失敗: {{ errorMessage }}
         </div>

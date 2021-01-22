@@ -1,5 +1,5 @@
 <div class="inform_sheet">
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="form_sheet" action="">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="form_sheet" action="" enctype="multipart/form-data">
   <div id="addr_text">
       <label>
       選擇地圖通報   
@@ -63,15 +63,15 @@
       </label>
     </div>   
     <div id="user_name">
-    <input type="text" formControlName="user_name">
+    <input type="text" formControlName="user_name" id="user_name" disabled="true">
     </div>
-    <img src={{url}} style="width: 260px;height: auto; margin-top: 40px;border:0.01px #f0f0f0 solid;margin-left: 10px;">
+    <img src={{url}} style="width: 230px;height: auto; margin-top: 20px;border:0.01px #f0f0f0 solid;margin-left: 10px;">
     <input
       style="display: none;"
       type="file" (change)="onFileChanged($event)"
       #fileInput
       >
-      <button type="button" (click)="fileInput.click()" style="margin:30px 10px;font-size:18px;padding:5px;color:white;background-color: rgb(105, 105, 105);" >選擇圖片</button>    
+      <button type="button" (click)="fileInput.click()" style="margin:30px 10px 10px;font-size:18px;padding:5px;color:white;background-color: rgb(105, 105, 105);" >選擇圖片</button>    
     <button id="confirm_button" type="submit" ng-click="refresh($event)">確認通報</button>
 </form>
 </div>
