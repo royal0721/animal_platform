@@ -7,3 +7,5 @@
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/login.png)
 ###### 通報頁面
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/inform.png)
+###### 通報部驟
+1. 輸入通報資訊
