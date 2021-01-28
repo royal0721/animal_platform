@@ -1,2 +1,3 @@
-# angular file
-This is the file for angular to show the page of the website
+# TNR 流浪動物通報系統
+
+### 目地： 為了改善現在流浪動物通報團體在使用的方法。
