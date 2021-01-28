@@ -9,7 +9,7 @@
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/login.png)
 #### 通報頁面
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/inform.png)
-##### 通報部驟
+##### 通報步驟
 ###### 1. 點擊預通報位置
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/click.png)
 ###### 2. 完成通報表格
