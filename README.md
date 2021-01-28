@@ -11,6 +11,6 @@
 1. 點擊預通報位置
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/click.png)
 2. 完成通報表格
-![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/inform_up.png)
+![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/inform_upload.png)
 3. 通報後地圖可見之
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/complete.png)
