@@ -5,3 +5,5 @@
 ##### 執行成功介面說明：
 ###### 登入系統頁面
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/login.png)
+###### 通報頁面
+![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/inform.png)
