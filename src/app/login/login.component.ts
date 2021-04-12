@@ -2,18 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { TokenStorageService } from '../token-storage.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  role: String[]=[];
+  role: String [] = [];
 
   constructor(protected router: Router,private authService: AuthService, private tokenStorage: TokenStorageService) { }
 

@@ -1,87 +1,89 @@
-<div class="col-md-12">
-    <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            [(ngModel)]="form.username"
-            required
-            minlength="3"
-            maxlength="20"
-            #username="ngModel"
-          />
-          <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-            <div *ngIf="username.errors.required">Username is required</div>
-            <div *ngIf="username.errors.minlength">
-              Username must be at least 3 characters
-            </div>
-            <div *ngIf="username.errors.maxlength">
-              Username must be at most 20 characters
-            </div>
-          </div>
+<div id="container">
+<div class="nav" style="height:12vh;background-color:#ffffff;">
+<button backButton class="btn btn-outline-secondary" id="back-btn" style="position: absolute;margin-top: 25px;margin-bottom: 10px;margin-left: 30px;" (click)="goBack()" >回上頁</button>
+</div>
+<div id="register-container">
+    <div style="width: 45vw;margin: 5px auto;box-shadow: 0 0 15px #cecece;" id="register-card">
+        <div id="card-header" style="display: flex;padding: 15px;align-items: center;background-color: rgb(115, 125, 129);">
+            <img style="width:80px;height: auto;" src="https://raw.githubusercontent.com/royal0721/cat/main/register_icon.png">
+            <div>
+                <h6 style="font-weight:400;color:rgb(223, 219, 219);">TNR通報系統</h6>
+                <h5 style="font-weight:600;color:rgb(255, 255, 255);">註冊新帳號</h5>
+            </div> 
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            [(ngModel)]="form.email"
-            required
-            email
-            #email="ngModel"
-          />
-          <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-            <div *ngIf="email.errors.required">Email is required</div>
-            <div *ngIf="email.errors.email">
-              Email must be a valid email address
-            </div>
-          </div>
+        <div id="card-container">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" style="padding: 10px;display: block;margin: 0px auto 50px;">
+                <div style="display: flex;">
+                    <div style="padding-top:40px;padding-left: 105px;">
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">姓</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">名</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">信箱</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 35px;">代表機構</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 35px;">代表機構負責人</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">手機</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">帳號</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">密碼</label></div>
+                        <div><label style="font-size: 20px;color:grey;padding-right: 30px;padding-bottom: 28px;">再輸入密碼</label></div>
+                    </div>
+                    <div style="padding-top:40px;padding-left: 50px;">                        
+                        <div>
+                            <input type="text" formControlName="lastName" placeholder="姓" class="form-control"  style="margin-right: 30px;margin-bottom: 25px;" />
+                            <div class="invalid-feedback">
+                                <div>姓 為必填欄位</div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" formControlName="firstName" placeholder="名" class="form-control"  style="margin-right: 30px;margin-bottom: 25px;"/>
+                            <div class="invalid-feedback">
+                                <div>名 為必填欄位</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <input type="email" formControlName="Email" placeholder="信箱" class="form-control" style="margin-right: 30px;margin-bottom: 25px;"/>
+                            <div class="invalid-feedback">
+                                <div>Email 為必填欄位</div>
+                            </div>                        
+                        </div>
+                        <div>
+                            <input type="text" formControlName="Organization" placeholder="代表機構"  class="form-control" style="margin-right: 30px;margin-bottom: 5px;"/>
+                                <p style="color:#cecece;font-size:10px;">若無代表機構，則無需填寫</p>                         
+                        </div>
+                        <div>
+                            <input type="text" formControlName="Owner" placeholder="代表機構負責人" class="form-control" style="margin-right: 30px;margin-bottom: 5px;"/>
+                            <p style="color:#cecece;font-size:10px;margin-bottom: 15px;">若無代表機構，則無需填寫</p>
+                        </div>
+                        <div>
+                            <input type="number" formControlName="Phone_number" placeholder="手機" class="form-control" style="margin-right: 30px;margin-bottom: 25px;"/>
+                            <div class="invalid-feedback">
+                                <div>手機號碼 為必填欄位</div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="text" formControlName="username" class="form-control" placeholder="帳號" style="margin-right: 30px;margin-bottom: 25px;"/>
+                            <div class="invalid-feedback">
+                                <div>帳號 為必填欄位</div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="password" formControlName="password" class="form-control" placeholder="密碼" style="margin-right: 30px;margin-bottom: 25px;"/>
+                            <div class="invalid-feedback">
+                                <div>密碼 為必填欄位</div>
+                            </div>                        
+                        </div>
+                        <div>
+                            <input type="password" formControlName="confirmed_pssword" class="form-control" placeholder="再輸入密碼" style="font-size: 18px;color:grey;margin-right: 30px;"/></div>
+                            <div class="invalid-feedback">
+                                <div>確認密碼 為必填欄位</div>
+                            </div>                        
+                        </div>    
+                </div>
+                <div style="text-align: center;">                
+                    <button class="btn btn-outline-secondary btn-lg" style="width: 63%;margin-top: 10px;margin-bottom: 20px;">註冊</button>
+                </div>
+
+            </form>
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            [(ngModel)]="form.password"
-            required
-            minlength="6"
-            #password="ngModel"
-          />
-          <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <button class="btn btn-primary btn-block">Sign Up</button>
-        </div>
-  
-        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-          Signup failed!<br />{{ errorMessage }}
-        </div>
-      </form>
-  
-      <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
-      </div>
     </div>
-  </div>
-  
+</div>
+</div>
