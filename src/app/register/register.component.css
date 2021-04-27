@@ -2,3 +2,16 @@ input[type=text] {
     background-color: #f3f3f3;
     color: rgb(54, 54, 54);
   }
+.card-container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+form{
+    width:80%;
+    margin:50px auto;
+}
+p{
+  color:grey;
+  font-size: 10px;
+}
