@@ -7,6 +7,8 @@
 ### 執行成功介面說明：
 #### 登入系統頁面
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/login.png)
+#### 註冊介面 (修改中)
+![image](https://raw.githubusercontent.com/royal0721/cat/main/%E8%A8%BB%E5%86%8A.PNG)
 #### 通報頁面
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/inform.png)
 ##### 通報步驟
