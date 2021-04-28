@@ -10,22 +10,21 @@
                 <h6 style="font-weight:400;color:rgb(223, 219, 219);">TNR通報系統</h6>
                 <h5 style="font-weight:600;color:rgb(255, 255, 255);">註冊新帳號</h5>
             </div>
-            <span *ngIf="loading" class="spinner-border spinner-border-lg" style="margin-left: 20px;width: 3rem; height: 3rem;"></span> 
         </div>
         <div id="card-container">
                 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
                         <label>姓</label>
-                        <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                            <div *ngIf="f.lastName.errors.required">姓 為必填欄位</div>
+                        <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
+                        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.last_name.errors.required">姓 為必填欄位</div>
                         </div>
                     </div>                
                     <div class="form-group">
                         <label>名</label>
-                        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                            <div *ngIf="f.firstName.errors.required">名為必填欄位</div>
+                        <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
+                        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.first_name.errors.required">名 為必填欄位</div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -59,6 +58,9 @@
                         <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
                             <div *ngIf="f.id.errors.required">使用者ID 為必填欄位</div>
                         </div>
+                    <p *ngIf="isSignUpFailed" style="color:rgb(236, 56, 56)">
+                        請重新填入帳號
+                    </p>
                     </div>
                     <div class="form-group">
                         <label>密碼</label>
@@ -76,8 +78,11 @@
                             <div *ngIf="f.confirmed_password.errors.mustMatch">確認密碼必須與密碼相同</div>
                         </div>
                     </div>
+                    <div *ngIf="isSignUpFailed" style="color:rgb(236, 56, 56)">
+                        此帳號已經有人使用，請重新填入帳號
+                    </div>
                     <div class="form-group">
-                        <button class="btn btn-outline-secondary btn-lg" style="width: 100%;margin-top: 20px;margin-bottom: 30px;">註冊</button>
+                        <button class="btn btn-outline-secondary btn-lg" style="width: 100%;margin-top: 20px;margin-bottom: 30px;">註冊<span *ngIf="loading" class="spinner-border spinner-border-sm" style="margin-left: 20px;width: 3rem; height: 3rem;"></span> </button>
                     </div>
                 </form>
                 

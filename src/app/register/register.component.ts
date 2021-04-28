@@ -37,8 +37,8 @@ export class RegisterComponent implements OnInit {
   
   ngOnInit(): void {
     this.userForm =this.formBuilder.group({
-      lastName: ['', Validators.nullValidator && Validators.required],
-      firstName: ['', Validators.nullValidator && Validators.required],
+      last_name: ['', Validators.nullValidator && Validators.required],
+      first_name: ['', Validators.nullValidator && Validators.required],
       email: ['', Validators.nullValidator && Validators.required],
       organization: [''],
       owner: [''],
@@ -87,6 +87,7 @@ export class RegisterComponent implements OnInit {
     this.loading=true;
     this.registerService.addUser(origin_value).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);
+      window.alert("您已註冊成功! 歡迎為浪浪盡一份心力")
       this.userForm.reset();
       this.redirect();
     },
