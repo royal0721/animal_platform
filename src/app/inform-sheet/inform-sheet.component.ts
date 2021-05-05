@@ -40,7 +40,8 @@ export class InformSheetComponent implements OnInit {
   
   // get the address
   ngOnInit(): void {
-    this.userForm.controls['user_name'].setValue(this.tokenStorage.getUser().firstName+" "+this.tokenStorage.getUser().lastName);
+    var nameNroleList = this.tokenStorage.getUser().username.split(",");
+    this.userForm.controls['user_name'].setValue(nameNroleList[0]);
   }
     
   onSubmit() {

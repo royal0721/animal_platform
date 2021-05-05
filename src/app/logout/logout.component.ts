@@ -9,22 +9,23 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
   
-  firstName: String[]=[];
-  lastName: String[]=[];
+  username: String[]=[];
   role: String;
 
   constructor(protected router: Router,private authService: AuthService,private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.firstName = this.tokenStorage.getUser().firstName;
-    this.lastName = this.tokenStorage.getUser().lastName;
-      if(this.tokenStorage.getUser().role==1){
+    var nameNrole = this.tokenStorage.getUser().username;
+    var nameNroleList = nameNrole.split(",");
+
+
+    this.username = nameNroleList[0];
+      if(nameNroleList[1]==0){
         this.role = "一般通報者";
       }else{
         this.role = "動保相關團體";
       }
-    console.log(this.firstName);
-    console.log(this.lastName);
+    console.log(this.username);
     console.log(this.role);
 
   }

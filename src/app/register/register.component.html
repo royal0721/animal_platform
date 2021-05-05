@@ -14,21 +14,21 @@
         <div id="card-container">
                 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
-                        <label>姓</label>
+                        <label>姓*</label>
                         <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
                         <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                             <div *ngIf="f.last_name.errors.required">姓 為必填欄位</div>
                         </div>
                     </div>                
                     <div class="form-group">
-                        <label>名</label>
+                        <label>名*</label>
                         <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
                         <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                             <div *ngIf="f.first_name.errors.required">名 為必填欄位</div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
+                        <label>Email*</label>
                         <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Email 為必填欄位</div>
@@ -46,14 +46,14 @@
                         <p>若無則無需填寫</p>
                     </div>
                     <div class="form-group">
-                        <label>手機號碼</label>
+                        <label>手機號碼*</label>
                         <input type="number" formControlName="phone_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }" />
                         <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
                             <div *ngIf="f.phone_number.errors.required">手機號碼 為必填欄位</div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>使用者ID</label>
+                        <label>使用者ID*</label>
                         <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.id.errors }" />
                         <div *ngIf="submitted && f.id.errors" class="invalid-feedback">
                             <div *ngIf="f.id.errors.required">使用者ID 為必填欄位</div>
@@ -63,7 +63,7 @@
                     </p>
                     </div>
                     <div class="form-group">
-                        <label>密碼</label>
+                        <label>密碼*</label>
                         <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">密碼 為必填欄位</div>
@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>確認密碼</label>
+                        <label>確認密碼*</label>
                         <input type="password" formControlName="confirmed_password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmed_password.errors }" />
                         <div *ngIf="submitted && f.confirmed_password.errors" class="invalid-feedback">
                             <div *ngIf="f.confirmed_password.errors.required">確認密碼 為必填欄位</div>

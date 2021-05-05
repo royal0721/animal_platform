@@ -10,7 +10,11 @@ import { } from 'googlemaps';
   templateUrl: './map-sheet.component.html',
   styleUrls: ['./map-sheet.component.css']
 })
+
+// 假設現在沒有資料，我們要怎麼顯示? service出現error的處理。
+
 export class MapSheetComponent implements OnInit {
+
   @ViewChild('gmap', {static: true}) public gmapElement: any;
 
   map: google.maps.Map;
@@ -20,7 +24,7 @@ export class MapSheetComponent implements OnInit {
   informs: any[] = [];
   inform_list:any[]=[];
   constructor(private informSheetService :InformSheetService) {
-   }
+  }
    
    destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -41,24 +45,26 @@ export class MapSheetComponent implements OnInit {
          zoom: 13,
          mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
+
     const map = new google.maps.Map(this.gmapElement.nativeElement,    mapProperties);
     const geocoder = new google.maps.Geocoder();     
-   placeMap(this.inform_list);
-   google.maps.event.addListener(map, 'click', function(event) {
-     times=times+1;
-     if(times<=1){
-       placeMarker(event.latLng);
-       (<HTMLInputElement>document.getElementById("location_added_long")).value = event.latLng;
-       console.log((<HTMLInputElement>document.getElementById("location_added_long")).value);
+    placeMap(this.inform_list);
+    google.maps.event.addListener(map, 'click', function(event) {
+      times=times+1;
+      if(times<=1){
+        placeMarker(event.latLng);
+        (<HTMLInputElement>document.getElementById("location_added_long")).value = event.latLng;
+        console.log((<HTMLInputElement>document.getElementById("location_added_long")).value);
       }else if(times>1){
-      placeMarker(event.latLng);
-      gmarkers[times-2].setMap(null);
-      (<HTMLInputElement>document.getElementById("location_added_long")).value = event.latLng;
-      console.log((<HTMLInputElement>document.getElementById("location_added_long")).value);
+        placeMarker(event.latLng);
+        gmarkers[times-2].setMap(null);
+        (<HTMLInputElement>document.getElementById("location_added_long")).value = event.latLng;
+        console.log((<HTMLInputElement>document.getElementById("location_added_long")).value);
       //location_added
-    }
-     
+    }   
   });
+
+  //建立lang跟lat
   function placeMap(locations){
     for (var i = 0; i < locations.length; i++) {  
       console.log(locations);
@@ -92,8 +98,8 @@ export class MapSheetComponent implements OnInit {
       })(marker, i));
     }
   }
-  function placeMarker(location) {
 
+  function placeMarker(location) {
       var marker = new google.maps.Marker({
           position: location, 
           map: map,
@@ -147,58 +153,63 @@ export class MapSheetComponent implements OnInit {
           }
         }
       );
-
   }
- const contentString =
+
+  const contentString =
    '<div id="content" style="width:120px;height:50px;font-size:20px;">' +
    '您的所在位置' +
    "</div>";
 
- const infowindow = new google.maps.InfoWindow({
-   content: contentString,
- });
-   if (navigator.geolocation) {
-     console.log("yes");
-     navigator.geolocation.getCurrentPosition(function(position) {
-         var pos = {
-             lat: position.coords.latitude,
-             lng: position.coords.longitude
-         };
-         console.log("now"+pos.lat);
-         var marker = new google.maps.Marker({
-             position: pos,
-             map: map
-         });
-         map.setZoom(14);
-         map.setCenter(pos);
-         marker.addListener("click", () => {
-           infowindow.open(map, marker);
-         });
-         infowindow.open(map, marker);
-       });
- } else {
-     alert("未允許或遭遇錯誤！");
- }      
-    })
+  const infowindow = new google.maps.InfoWindow({
+    content: contentString,
+  });
 
-
-
-
+  if (navigator.geolocation) {
+    console.log("yes");
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+           lat: position.coords.latitude,
+           lng: position.coords.longitude
+      };
+      console.log("now"+pos.lat);
+      var marker = new google.maps.Marker({
+        position: pos,
+        map: map
+      });
+      map.setZoom(14);
+      map.setCenter(pos);
+      marker.addListener("click", () => {
+        infowindow.open(map, marker);
+      });
+      infowindow.open(map, marker);
+    });
+  } else {
+    alert("未允許或遭遇錯誤！");
+  }      
+  }
+  )
 
  function convertToMapPoints(response){
-
+  console.log(response);
   var locations = [];
 
   for(var i= 0; i < response.length; i++) {
       var animal = response[i];
-
+      var gender="";
+      if(animal.gender=1){
+        gender="公";
+      }else if(animal.gender=0){
+        gender="母";
+      }else if(animal.gender=2){
+        gender="未知性別";
+      }
       var  contentString =
-          '<p>' + animal.sex+animal.animal_type +
-          '<br><b>名字： </b>: ' + animal.animal_name +
-          '<br><b>地址： </b>: ' + animal.location + animal.location2 + animal.location3 +
-          '<br><b>經緯度： </b>: ' + animal.location4 +
+          '<p>' + gender+animal.type +
+          '<br><b>名字： </b>: ' + animal.name +
+          '<br><b>地址： </b>: ' + animal.address + animal.address2 + animal.address3 +
+          '<br><b>經緯度： </b>: ' + animal.latlong +
           '</p>';
-      var locationtext = animal.location4.replace("(","");
+      var locationtext = animal.latlong.replace("(","");
       locationtext = locationtext.replace(")","");
       locationtext = locationtext.replace(" ","");
       console.log(locationtext)
@@ -210,9 +221,9 @@ export class MapSheetComponent implements OnInit {
               content: contentString,
               maxWidth: 320
           }),
-          animal_name: animal.animal_name,
-          sex: animal.sex,
-          address: animal.location+animal.location2+animal.location3 ,
+          animal_name: animal.name,
+          sex: animal.gender,
+          address: animal.address+animal.address2+animal.address3 ,
           location4:location 
   });
 }
@@ -220,7 +231,7 @@ export class MapSheetComponent implements OnInit {
 return locations;
 };
 
-  }
+}
  //no need
   click_to_target(){
     console.log('trigger');     
@@ -235,6 +246,5 @@ return locations;
       }
   }
   
-
 }
 //<button style="position: absolute;top:0px;right:350px;top:55px;z-index:2;" (click)="click_to_target()">搜尋定位</button>

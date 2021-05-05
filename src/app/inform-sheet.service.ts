@@ -10,7 +10,7 @@ import { retry, catchError } from 'rxjs/operators';
 export class InformSheetService {
 
   constructor(private http:HttpClient) { }
-  rootURL = 'http://34.207.183.15:4000/inform';
+  rootURL = 'http://localhost:5000/informs';
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';

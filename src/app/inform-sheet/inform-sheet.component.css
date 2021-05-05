@@ -25,12 +25,12 @@ input#location_added_addr,input#location_added_long{
 	height: 30px;
 	padding-left: 5px;
 	margin-left: 5px;
-	margin-top: 10px;
+	margin-top: 5px;
 }
 #addr_text,#type_text,#sex_text,#animal_name_text,#user_name_text{
 	color: #000000;
 	font-weight: 700;
-	padding: 18px 10px ;
+	padding: 13px 10px ;
 }
 .inform_sheet{
 	border: solid 1px rgb(230, 230, 230);
@@ -89,7 +89,7 @@ select{
  border: #ffff 0.05px solid;
 }
 #location_added{
-	margin-top: 15px;
+	margin-top: 10px;
 	padding: 1px;
 	padding-left: 10px;
 	height: 30px;
