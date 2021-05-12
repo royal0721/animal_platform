@@ -20,20 +20,21 @@ export class InformSheetComponent implements OnInit {
   area_data = area_data;
   url;
   location_text:String;
+  file: File;
 
   constructor(private informSheetService :InformSheetService, private tokenStorage: TokenStorageService) {
 
    }
 
   userForm = new FormGroup({
-    user_name: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
-    animal_name: new FormControl('', Validators.nullValidator && Validators.required),
-    animal_type:new FormControl('', Validators.nullValidator && Validators.required),
-    sex: new FormControl('', Validators.nullValidator && Validators.required),
-    location: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
-    location2: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
-    location3: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
-    location4: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required]))
+    informer_id: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    name: new FormControl('', Validators.nullValidator && Validators.required),
+    type:new FormControl('', Validators.nullValidator && Validators.required),
+    gender: new FormControl('', Validators.nullValidator && Validators.required),
+    address: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    address2: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    address3: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
+    latlong: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required]))
   });
 
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -41,21 +42,46 @@ export class InformSheetComponent implements OnInit {
   // get the address
   ngOnInit(): void {
     var nameNroleList = this.tokenStorage.getUser().username.split(",");
-    this.userForm.controls['user_name'].setValue(nameNroleList[0]);
+    this.userForm.controls['informer_id'].setValue(nameNroleList[0]);
   }
     
   onSubmit() {
 
-    this.userForm.controls['location'].setValue((<HTMLSelectElement>document.getElementById("location_selector")).value);
-    this.userForm.controls['location2'].setValue((<HTMLSelectElement>document.getElementById("location2_selector")).value);
-    this.userForm.controls['location3'].setValue((<HTMLSelectElement>document.getElementById("location_added_addr")).value);
-    this.userForm.controls['location4'].setValue((<HTMLSelectElement>document.getElementById("location_added_long")).value);
+    this.userForm.controls['address'].setValue((<HTMLSelectElement>document.getElementById("address_selector")).value);
+    this.userForm.controls['address2'].setValue((<HTMLSelectElement>document.getElementById("address2_selector")).value);
+    this.userForm.controls['address3'].setValue((<HTMLSelectElement>document.getElementById("location_added_addr")).value);
+    this.userForm.controls['latlong'].setValue((<HTMLSelectElement>document.getElementById("location_added_long")).value);
+    var data = this.userForm.getRawValue();
+    console.log(this.file);
+    data.File =this.file;
+    console.log(data);
+    data.org_status=1;
+    data.captured_time=new Date().getTime();
+    data.progress_time=data.captured_time;
+    data.handler_id=data.informer_id;
+    data.now_status=0;
+    const formData = new FormData();
 
-    this.informSheetService.addInform(this.userForm.getRawValue()).pipe(takeUntil(this.destroy$)).subscribe(data => {
+    // Append files to the virtual form.
+    formData.append("file", this.file)
+    formData.append('user', new Blob([JSON.stringify(data)], {
+      type: "application/json"
+    }));
+    formData.forEach((value,key) => {
+      console.log(key+" "+value)
+    });
+    // for (var key of Object.keys(json)) {
+    //   formData.append(key,json[key])
+    // }
+    // Optional, append other kev:val rest data to the form.
+
+    this.informSheetService.addInform(formData).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);
       this.userForm.reset();
       window.location.reload();
     });
+
+    console.log(formData);
 
     console.log('Submit'+this.userForm.getRawValue());
   }
@@ -70,7 +96,7 @@ export class InformSheetComponent implements OnInit {
 
     console.log(id);
     this.selected_area=(this.area_data.find(c => c.area === id));
-    this.userForm.controls['location2'].setValue('');
+    this.userForm.controls['address2'].setValue('');
     if(this.selected_area){
       this.selected_zone=(this.selected_area.zone);
     }else{
@@ -83,7 +109,7 @@ export class InformSheetComponent implements OnInit {
     var pattern = new RegExp('(/^[+-]?\d+(\.\d+)?$/,/^[+-]?\d+(\.\d+)?$/)');
     var result=pattern.test(lan);
     if(result!=false){
-      let control = this.userForm.get('location')
+      let control = this.userForm.get('address')
       control.disable();
     }
   }
@@ -91,8 +117,8 @@ export class InformSheetComponent implements OnInit {
   onFileChanged(event) {
     let reader = new FileReader();
     if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-      reader.readAsDataURL(file);
+      this.file = event.target.files[0];
+      reader.readAsDataURL(this.file);
       reader.onload = () => {
         this.url = reader.result; 
         console.log('Submit'+this.userForm.value);

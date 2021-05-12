@@ -7,63 +7,63 @@
       </div>
       <div id="location">
       <div id="location_top">
-          <input type="text" formControlName="location"  id="location_selector" placeholder="縣市" disabled="true">
-          <input type="text" formControlName="location2"  id="location2_selector" placeholder="鄉鎮市區" disabled="true">
+          <input type="text" formControlName="address"  id="address_selector" placeholder="縣市" disabled="true">
+          <input type="text" formControlName="address2"  id="address2_selector" placeholder="鄉鎮市區" disabled="true">
       </div>
-          <input type="text" formControlName="location3" id="location_added_addr" placeholder="路段"  disabled="true" >
-          <input type="text" formControlName="location4" id="location_added_long" placeholder="經緯度" (change)="lat_test($event.target.value)" disabled="true" style="width:350px;" >
+          <input type="text" formControlName="address3" id="location_added_addr" placeholder="路段"  disabled="true" >
+          <input type="text" formControlName="latlong" id="location_added_long" placeholder="經緯度" (change)="lat_test($event.target.value)" disabled="true" style="width:350px;" >
       </div>
       <div id="type_text">
       <label>
         動物種類
       </label>  
     </div>
-      <div id="animal_type">
+      <div id="type">
         <label>
-          <input type="radio" name="animal_type" value="貓" [formControl]="userForm.controls['animal_type']">
+          <input type="radio" name="type" value="貓" [formControl]="userForm.controls['type']">
           貓
         </label>
         <label>
           <!-- radio 和 checkbox 用法也一樣 -->
-          <input type="radio" name="animal_type" value="狗" [formControl]="userForm.controls['animal_type']">
+          <input type="radio" name="type" value="狗" [formControl]="userForm.controls['type']">
           狗
         </label>
       </div>
-      <div id="sex_text">
+      <div id="gender_text">
         <label>
           動物性別
         </label>  
       </div>
-      <div id="sex">
+      <div id="gender">
           <label>
-            <input type="radio" name="sex" value="公" [formControl]="userForm.controls['sex']">
+            <input type="radio" name="gender" value="1" [formControl]="userForm.controls['gender']">
             公
           </label>
           <label>
             <!-- radio 和 checkbox 用法也一樣 -->
-            <input type="radio" name="sex" value="母" [formControl]="userForm.controls['sex']">
+            <input type="radio" name="gender" value="0" [formControl]="userForm.controls['gender']">
             母
           </label>
           <label>
             <!-- radio 和 checkbox 用法也一樣 -->
-            <input type="radio" name="sex" value="未知" [formControl]="userForm.controls['sex']">
+            <input type="radio" name="gender" value="2" [formControl]="userForm.controls['gender']">
             未知
           </label>
        </div>
-      <div id="animal_name_text">
+      <div id="name_text">
       <label>
         取名 （若無則填無）   
       </label></div>   
-      <div id="animal_name">
-        <input type="text" formControlName="animal_name" >
+      <div id="name">
+        <input type="text" formControlName="name" >
       </div> 
-      <div id="user_name_text">
+      <div id="informer_id_text">
       <label>
       通報者ID    
       </label>
     </div>   
-    <div id="user_name">
-    <input type="text" formControlName="user_name" id="user_name" disabled="true">
+    <div id="informer_id">
+    <input type="text" formControlName="informer_id" id="informer_id" disabled="true">
     </div>
     <img src={{url}} style="width: 230px;height: auto; margin-top: 20px;border:0.01px #f0f0f0 solid;margin-left: 10px;">
     <input

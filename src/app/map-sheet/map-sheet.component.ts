@@ -126,10 +126,10 @@ export class MapSheetComponent implements OnInit {
                 }else if(results[0].address_components[i].types[0]=='administrative_area_level_3'){
                   var area = results[0].address_components[i].long_name;
                   
-                  (<HTMLSelectElement>document.getElementById("location2_selector")).value = area;
+                  (<HTMLSelectElement>document.getElementById("address2_selector")).value = area;
                 }else if(results[0].address_components[i].types[0]=='administrative_area_level_1'){
                   var city = results[0].address_components[i].long_name;
-                  (<HTMLSelectElement>document.getElementById("location_selector")).value = city;
+                  (<HTMLSelectElement>document.getElementById("address_selector")).value = city;
                 }
               }
               console.log(results[0]);
@@ -190,6 +190,7 @@ export class MapSheetComponent implements OnInit {
   )
 
  function convertToMapPoints(response){
+  console.log("Hello");
   console.log(response);
   var locations = [];
 
@@ -204,11 +205,15 @@ export class MapSheetComponent implements OnInit {
         gender="未知性別";
       }
       var  contentString =
+          '<div style="width:160px;height:auto;" >'    +
           '<p>' + gender+animal.type +
-          '<br><b>名字： </b>: ' + animal.name +
-          '<br><b>地址： </b>: ' + animal.address + animal.address2 + animal.address3 +
-          '<br><b>經緯度： </b>: ' + animal.latlong +
-          '</p>';
+          '<br><b>名字 </b>: ' + animal.name +
+          '<br><b>地址 </b>: ' + animal.address + animal.address2 + animal.address3 +
+          '<br><b>經緯度 </b>: ' + animal.latlong +
+          '<img style="width:150px;height:150px;" src="data:image/png;base64, '+ animal.img_url + '" />'
+          '</p>'
+      +'</div>'
+      ;
       var locationtext = animal.latlong.replace("(","");
       locationtext = locationtext.replace(")","");
       locationtext = locationtext.replace(" ","");
@@ -221,10 +226,10 @@ export class MapSheetComponent implements OnInit {
               content: contentString,
               maxWidth: 320
           }),
-          animal_name: animal.name,
-          sex: animal.gender,
+          name: animal.name,
+          gender: animal.gender,
           address: animal.address+animal.address2+animal.address3 ,
-          location4:location 
+          latlong:location 
   });
 }
 
@@ -237,9 +242,9 @@ return locations;
     console.log('trigger');     
     //var select = document.getElementById('location_selector').value; 
     //console.log(select.Sel);
-    if((<HTMLSelectElement>document.getElementById('location_selector')).value&&(<HTMLSelectElement>document.getElementById('location2_selector')).value){    
-        console.log((<HTMLSelectElement>document.getElementById('location_selector')).value);
-        console.log((<HTMLSelectElement>document.getElementById('location2_selector')).value);
+    if((<HTMLSelectElement>document.getElementById('address_selector')).value&&(<HTMLSelectElement>document.getElementById('address2_selector')).value){    
+        console.log((<HTMLSelectElement>document.getElementById('address_selector')).value);
+        console.log((<HTMLSelectElement>document.getElementById('address2_selector')).value);
       
       }else{
         console.log("請選擇值");

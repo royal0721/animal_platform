@@ -30,10 +30,10 @@ export class InformSheetService {
   }
 
   addInform(details:any){
-    let headers = new HttpHeaders({
-      'Content-Type': 'application/json'});
-      let options = { headers: headers };   
-      return this.http.post(this.rootURL ,details, options);
+    // let headers = new HttpHeaders({
+    //   'Content-Type': 'multipart/form-data'});
+    //   let options = { headers: headers };   
+      return this.http.post(this.rootURL ,details);
   }
 
 }

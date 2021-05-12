@@ -8,7 +8,7 @@
 #location_top{
 	display: flex;
 }
-input#location_selector,input#location2_selector{
+input#address_selector,input#address2_selector{
 	background-color: #ffffff;
 	border: 0.05px #f0f0f0 solid;
 	border-radius: 5px;
@@ -27,7 +27,7 @@ input#location_added_addr,input#location_added_long{
 	margin-left: 5px;
 	margin-top: 5px;
 }
-#addr_text,#type_text,#sex_text,#animal_name_text,#user_name_text{
+#addr_text,#type_text,#gender_text,#name_text,#informer_id_text{
 	color: #000000;
 	font-weight: 700;
 	padding: 13px 10px ;
@@ -44,8 +44,10 @@ input#location_added_addr,input#location_added_long{
 	position: absolute;
 	right:5px;
 	z-index: 2;
+	height: 99vh;
+	overflow: auto;
 }
-#location,#animal_type,#sex,#animal_name,#user_name{
+#address,#type,#gender,#name,#informer_id{
 	padding:0px 12px;
 }
 .inform_text{
@@ -98,7 +100,7 @@ select{
 	border: #f0f0f0 0.05px solid;
 
 }
-input#user_name{
+input#informer_id{
 	background-color: #ffffff;
 	border: 0.05px #f0f0f0 solid;
 	padding: 1px;
