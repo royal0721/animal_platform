@@ -23,6 +23,8 @@ export class MapSheetComponent implements OnInit {
   geocoder ;
   informs: any[] = [];
   inform_list:any[]=[];
+  Loading=true;
+
   constructor(private informSheetService :InformSheetService) {
   }
    
@@ -32,7 +34,8 @@ export class MapSheetComponent implements OnInit {
 
     this.informSheetService.getInform().pipe(takeUntil(this.destroy$)).subscribe((informs: any[])=>{
       
-      console.log(informs);
+      // console.log(informs);
+      this.Loading=false;
       this.informs=informs;
       this.inform_list=convertToMapPoints(this.informs);
       
@@ -207,10 +210,10 @@ export class MapSheetComponent implements OnInit {
       var  contentString =
           '<div style="width:170px;height:auto;" >'    +
           '<h5 style="background-color:grey;color:white;text-align: center;">' +'編號: '+animal.id+'</h5>'+
-          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">性別/品種:</h6><b style="padding-left:5px;font-weight:bold;color:#898989;">'+ gender+animal.type+ '</b></div>'+
-          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">名字:</h6>' +'<b style="padding-left:5px;font-weight:bold;color:#898989;">'+ animal.name +'</b></div>'+
-          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">地址:</h6><b style="padding-left:5px;font-weight:bold;"color:#898989;> ' + animal.address + animal.address2 + animal.address3 +'</b></div>'+
-          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">經緯度:</h6><b style="padding-left:5px;font-weight:bold;color:#898989;"> ' + animal.latlong +'</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">性別/品種:</h6><b style="padding-left:5px;font-weight:bold;color:grey;">'+ gender+animal.type+ '</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">名字:</h6>' +'<b style="padding-left:5px;font-weight:bold;color:grey;">'+ animal.name +'</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">地址:</h6><b style="padding-left:5px;font-weight:bold;color:grey;"> ' + animal.address + animal.address2 + animal.address3 +'</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">經緯度:</h6><b style="padding-left:5px;font-weight:bold;color:grey;"> ' + animal.latlong +'</b></div>'+
           '<img style="width:170px;height:auto;padding-top:10px;" src="data:image/png;base64, '+ animal.img_url + '" />'
           '</p>'
       +'</div>'
