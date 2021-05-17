@@ -134,7 +134,7 @@ export class MapSheetComponent implements OnInit {
               }
               console.log(results[0]);
               const addcontent =
-              '<div id="content" style="width:200px;height:100px;"><div style="font-size:20px;color:grey;">' +
+              '<div id="content" style="width:200px;height:100px;"><div style="font-size:20px;color:grey;font-weight:">' +
               '預計通報位置:</div><div style="font-size:18px;color:rgb(93,93,93);">'+address.slice(5, )+"</div></div>";
               const infowindow = new google.maps.InfoWindow({
                content: addcontent,
@@ -205,12 +205,13 @@ export class MapSheetComponent implements OnInit {
         gender="未知性別";
       }
       var  contentString =
-          '<div style="width:160px;height:auto;" >'    +
-          '<p>' + gender+animal.type +
-          '<br><b>名字 </b>: ' + animal.name +
-          '<br><b>地址 </b>: ' + animal.address + animal.address2 + animal.address3 +
-          '<br><b>經緯度 </b>: ' + animal.latlong +
-          '<img style="width:150px;height:150px;" src="data:image/png;base64, '+ animal.img_url + '" />'
+          '<div style="width:170px;height:auto;" >'    +
+          '<h5 style="background-color:grey;color:white;text-align: center;">' +'編號: '+animal.id+'</h5>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">性別/品種:</h6><b style="padding-left:5px;font-weight:bold;color:#898989;">'+ gender+animal.type+ '</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">名字:</h6>' +'<b style="padding-left:5px;font-weight:bold;color:#898989;">'+ animal.name +'</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">地址:</h6><b style="padding-left:5px;font-weight:bold;"color:#898989;> ' + animal.address + animal.address2 + animal.address3 +'</b></div>'+
+          '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">經緯度:</h6><b style="padding-left:5px;font-weight:bold;color:#898989;"> ' + animal.latlong +'</b></div>'+
+          '<img style="width:170px;height:auto;padding-top:10px;" src="data:image/png;base64, '+ animal.img_url + '" />'
           '</p>'
       +'</div>'
       ;
