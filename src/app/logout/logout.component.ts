@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../token-storage.service';
+import { WebsocketRealtimeService } from '../websocket-realtime.service';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 @Component({
@@ -12,7 +13,7 @@ export class LogoutComponent implements OnInit {
   username: String[]=[];
   role: String;
 
-  constructor(protected router: Router,private authService: AuthService,private tokenStorage: TokenStorageService) { }
+  constructor(protected router: Router,private authService: AuthService,private tokenStorage: TokenStorageService,private WebsocketService: WebsocketRealtimeService) { }
 
   ngOnInit(): void {
     var nameNrole = this.tokenStorage.getUser().username;
@@ -31,7 +32,8 @@ export class LogoutComponent implements OnInit {
   }
 
   logout() {
-    alert("您即將登出")
+    alert("您即將登出");
+    this.WebsocketService.disconnect();
     this.tokenStorage.signOut();
     this.reloadPage();
   }

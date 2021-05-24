@@ -4,7 +4,9 @@ import {  takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TokenStorageService } from '../token-storage.service';
+import {WebsocketRealtimeService} from '../websocket-realtime.service';
 import {area_data} from './area_data'
+import { animateChild } from '@angular/animations';
 
 
 @Component({
@@ -22,7 +24,7 @@ export class InformSheetComponent implements OnInit {
   location_text:String;
   file: File;
 
-  constructor(private informSheetService :InformSheetService, private tokenStorage: TokenStorageService) {
+  constructor(private informSheetService :InformSheetService, private tokenStorage: TokenStorageService, private WebSocketService: WebsocketRealtimeService ) {
 
    }
 
@@ -77,8 +79,28 @@ export class InformSheetComponent implements OnInit {
 
     this.informSheetService.addInform(formData).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);
+      const message = JSON.parse(JSON.stringify(data));
+      let result = {};
+      let time = new Date(message.captured_time);
+      //alert(message.captured_time);
+      result["id"]=message.id;
+      result["address1"]=message.address2;
+      // alert(message.address2);
+      result["animal_type"]=message.type;
+
+      if(message.gender==1){
+        result["animal_gender"]="公";
+      }else if(message.gender==0){
+        result["animal_gender"]="母";
+      }else{
+        result["animal_gender"]="未知";
+      }
+      
+      result["time"]=time.getTime();
       this.userForm.reset();
       window.location.reload();
+      this.WebSocketService.send(result);
+
     });
 
     console.log(formData);

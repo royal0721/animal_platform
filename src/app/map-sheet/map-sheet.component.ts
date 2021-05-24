@@ -200,11 +200,11 @@ export class MapSheetComponent implements OnInit {
   for(var i= 0; i < response.length; i++) {
       var animal = response[i];
       var gender="";
-      if(animal.gender=1){
+      if(animal.gender==1){
         gender="公";
-      }else if(animal.gender=0){
+      }else if(animal.gender==0){
         gender="母";
-      }else if(animal.gender=2){
+      }else if(animal.gender==2){
         gender="未知性別";
       }
       var  contentString =

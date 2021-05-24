@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { RealtimeComponent } from './realtime/realtime.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
-    HomeComponent
+    HomeComponent,
+    RealtimeComponent
   ],
   imports: [
     BrowserModule,
