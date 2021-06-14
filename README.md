@@ -6,7 +6,7 @@
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/sc_test.png)
 ### 執行成功介面說明：
 #### 登入系統頁面
-![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/login.png)
+![image](https://raw.githubusercontent.com/royal0721/dog_n_cat/main/login.PNG)
 #### 註冊介面
 ![image](https://raw.githubusercontent.com/royal0721/cat/main/%E8%A8%BB%E5%86%8A.PNG)
 #### 通報頁面
