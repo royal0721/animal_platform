@@ -1,0 +1,32 @@
+.count {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: rgb(102, 102, 102);
+    text-decoration: none;
+    cursor: pointer;
+  }
+.count:hover {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: rgb(63, 63, 63);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+.show_inform {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.show_inform [class*="col"], /* TWBS v3 */
+.show_inform [class*="animal_photo"] {  /* TWBS v2 */
+    display: inline-block;
+    float: none; /* Very important */
+}

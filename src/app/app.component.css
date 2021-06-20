@@ -1,0 +1,3 @@
+*,input,select,textarea,button{
+    outline:none!important;
+}

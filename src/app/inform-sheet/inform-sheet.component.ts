@@ -33,6 +33,7 @@ export class InformSheetComponent implements OnInit {
     name: new FormControl('', Validators.nullValidator && Validators.required),
     type:new FormControl('', Validators.nullValidator && Validators.required),
     gender: new FormControl('', Validators.nullValidator && Validators.required),
+    feeder: new FormControl('', Validators.nullValidator && Validators.required),
     address: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
     address2: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
     address3: new FormControl({ value:'',disabled: true}, Validators.compose([Validators.required])),
@@ -43,6 +44,7 @@ export class InformSheetComponent implements OnInit {
   
   // get the address
   ngOnInit(): void {
+    console.log(this.tokenStorage.getUser().username);
     var nameNroleList = this.tokenStorage.getUser().username.split(",");
     this.userForm.controls['informer_id'].setValue(nameNroleList[0]);
   }

@@ -21,7 +21,9 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   organizationError = '';
   loading = false;
-  
+  isNotComplete = false; 
+  phoneNotComplete = false; 
+
   constructor(private registerService :RegisterService,private router: Router,private formBuilder: FormBuilder) { 
 
   }
@@ -45,8 +47,8 @@ export class RegisterComponent implements OnInit {
       owner: [''],
       phone_number: ['', Validators.nullValidator && Validators.required],
       id: ['', Validators.nullValidator && Validators.required],
-      password: ['', Validators.nullValidator && Validators.required && Validators.minLength(6)],
-      confirmed_password: ['', Validators.nullValidator && Validators.required && Validators.minLength(6)]
+      password: ['', Validators.nullValidator && Validators.required ],
+      confirmed_password: ['', Validators.nullValidator && Validators.required ]
     }, {
       validator: TwoMatch('password', 'confirmed_password')
   });
@@ -62,6 +64,17 @@ export class RegisterComponent implements OnInit {
     var origin_value = this.userForm.getRawValue();
     console.log(origin_value);
 
+    origin_value['organization'] = origin_value.organization.replace(/\s*/g,"");
+    if(origin_value.organization!=''){
+      console.log("YES");
+      origin_value['role']=3;
+      this.isNotComplete = false;
+    }else if(origin_value.organization==''){
+      origin_value['role']=1;
+      console.log("YES");
+      this.isNotComplete = false;
+    }
+
     if (this.userForm.invalid) {
       return;
     }
@@ -74,17 +87,44 @@ export class RegisterComponent implements OnInit {
       delete origin_value['confirmed_password'];
       console.log("matched.");
     }
-
-    if(origin_value.organization==''&&origin_value.owner==''){
-      origin_value['organization']=='無';
-      origin_value['owner']=='無';
-      origin_value['role']==1; //normal informer
-    }else if(origin_value.organization!=''&&origin_value.owner==''){
-      this.isSignUpFailed=true;
-    }else{
-      origin_value['role']==2;
+    console.log(origin_value.organization);
+    console.log(origin_value.owner);
+    if(origin_value.phone_number.length!=10){
+      this.phoneNotComplete=true;
     }
+    // if(origin_value.organization===undefined&&origin_value.owner===undefined){
+    //   origin_value['organization']=='無';
+    //   origin_value['owner']=='無';
+    //   origin_value['role']==1; //normal informer
+    // }else if(origin_value.organization!==undefined&&origin_value.owner!==undefined){
+    //   this.isSignUpFailed=true;
+    // }else if(origin_value.organization&&origin_value.owner){
+    //   origin_value['role']==2;
+    // }
 
+
+    // if(origin_value.organization!=''&&origin_value.owner!=''){
+    //   console.log("YES");
+    //   origin_value['role']=3;
+    // }else if(origin_value.organization==''&&origin_value.owner==''){
+    //   origin_value['role']=1;
+    //   console.log("YES");
+    // }else if(origin_value.organization==''&&origin_value.owner!=''){
+    //   console.log("no");
+    //   this.isSignUpFailed = true;
+    //   this.loading = false;
+    //   this.errorMessage = '動保團體資料請填寫完整';
+    //   this.isNotComplete = true;
+    //   throw this.errorMessage;
+    // }else if(origin_value.organization!=''&&origin_value.owner==''){
+    //   this.isSignUpFailed = true;
+    //   this.loading = false;      
+    //   this.errorMessage = '動保團體資料請填寫完整';
+    //   this.isNotComplete = true;
+    //   throw this.errorMessage;
+    // }
+
+    console.log(origin_value['role']);
     this.loading=true;
     this.registerService.addUser(origin_value).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message:', data);

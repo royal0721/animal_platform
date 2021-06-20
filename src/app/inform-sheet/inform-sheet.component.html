@@ -1,3 +1,4 @@
+
 <div class="inform_sheet">
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()" id="form_sheet" action="" enctype="multipart/form-data">
   <div id="addr_text">
@@ -53,11 +54,27 @@
       <div id="name_text">
       <label>
         取名 （若無則填無）   
-      </label></div>   
+      </label></div>
       <div id="name">
         <input type="text" formControlName="name" >
       </div> 
-      <div id="informer_id_text">
+      <div id="feeder_text">
+        <label>
+          是否為餵養者
+        </label>  
+      </div>
+      <div id="feeder">
+        <label>
+          <input type="radio" name="feeder" value="1" [formControl]="userForm.controls['feeder']">
+          是
+        </label>
+        <label>
+          <!-- radio 和 checkbox 用法也一樣 -->
+          <input type="radio" name="feeder" value="0" [formControl]="userForm.controls['feeder']">
+          否
+        </label>
+     </div>
+      <div id="informer_id_text">   
       <label>
       通報者ID    
       </label>
@@ -75,4 +92,3 @@
     <button id="confirm_button" type="submit" ng-click="refresh($event)">確認通報</button>
 </form>
 </div>
-

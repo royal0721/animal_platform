@@ -29,27 +29,26 @@
                     </div>
                     <div class="form-group">
                         <label>Email*</label>
-                        <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <input type="text" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="Invalid email address" formControlName="email" class="form-control" placeholder="test@gmail.com" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" title="Please Provide A Valid Email Address !" />
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Email 為必填欄位</div>
-                            <div *ngIf="f.email.errors.email">Email 必須為有效值</div>
+                            <div *ngIf="f.email.errors.pattern">Email 必須為有效值</div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>任職機構名稱</label>
-                        <input type="text" formControlName="organization" class="form-control"/>
-                        <p>若無則無需填寫</p>
-                    </div>
-                    <div class="form-group">
-                        <label>機構負責人</label>
-                        <input type="text" formControlName="owner" class="form-control"/>
-                        <p>若無則無需填寫</p>
+                        <label>任職動保機構全名</label>
+                        <input type="text" formControlName="organization" class="form-control" [ngClass]="{ 'is-invalid': submitted && isNotComplete }"/>
+                        <p>若無則無需填寫，若有則需要填寫 (輸入空格者將被視為一般通報者)</p>
+                        <p *ngIf="isNotComplete" style="color:rgb(236, 56, 56)">
+                            若有於動保團體任職，請填寫以上兩欄以方便機構查核
+                        </p>
                     </div>
                     <div class="form-group">
                         <label>手機號碼*</label>
-                        <input type="number" formControlName="phone_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }" />
+                        <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" minlength=10 maxlength=10 formControlName="phone_number" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }" />
                         <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
                             <div *ngIf="f.phone_number.errors.required">手機號碼 為必填欄位</div>
+                            <div *ngIf="f.phone_number.errors.minlength">請輸入有效手機號碼</div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -64,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label>密碼*</label>
-                        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <input type="password" formControlName="password" minlength=6 class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                         <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                             <div *ngIf="f.password.errors.required">密碼 為必填欄位</div>
                             <div *ngIf="f.password.errors.minlength">密碼 至少需要輸入六個位元</div>
@@ -80,6 +79,9 @@
                     </div>
                     <div *ngIf="isSignUpFailed" style="color:rgb(236, 56, 56)">
                         此帳號已經有人使用，請重新填入帳號
+                    </div>
+                    <div *ngIf="isNotComplete" style="color:rgb(236, 56, 56)">
+                        請將動保團體相關資料填寫完整
                     </div>
                     <div class="form-group">
                         <button class="btn btn-outline-secondary btn-lg" style="width: 100%;margin-top: 20px;margin-bottom: 30px;">註冊<span *ngIf="loading" class="spinner-border spinner-border-sm" style="margin-left: 20px;width: 3rem; height: 3rem;"></span> </button>

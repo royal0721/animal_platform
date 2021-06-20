@@ -7,5 +7,6 @@ box-shadow: 3px 3px rgb(219, 219, 219);
 ">
 <p style="font-weight: bold;">{{username}} 歡迎登入</p>
 <span style="display: flex;">通報者：<p style="color:green;font-weight: bold;"> {{role}}</p></span>
-<button (click)="logout();">登出</button>
+<button class="btn-light" *ngIf="show" style="margin-right: 15px;" (click)="toAdminPage()">管理者頁面</button>
+<button class="btn-primary" (click)="logout();">登出</button>
 </div>

@@ -14,6 +14,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { RealtimeComponent } from './realtime/realtime.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { CheckMemberComponent } from './check-member/check-member.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { RealtimeComponent } from './realtime/realtime.component';
     LoginComponent,
     LogoutComponent,
     HomeComponent,
-    RealtimeComponent
+    RealtimeComponent,
+    AdminPageComponent,
+    CheckMemberComponent
   ],
   imports: [
     BrowserModule,

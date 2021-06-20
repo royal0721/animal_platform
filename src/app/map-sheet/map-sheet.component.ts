@@ -33,8 +33,8 @@ export class MapSheetComponent implements OnInit {
   ngOnInit(): void {
 
     this.informSheetService.getInform().pipe(takeUntil(this.destroy$)).subscribe((informs: any[])=>{
-      
-      // console.log(informs);
+
+      console.log(informs);
       this.Loading=false;
       this.informs=informs;
       this.inform_list=convertToMapPoints(this.informs);
@@ -208,7 +208,7 @@ export class MapSheetComponent implements OnInit {
         gender="未知性別";
       }
       var  contentString =
-          '<div style="width:170px;height:auto;" >'    +
+          '<div style="width:180px;height:auto;outline: none;" >'    +
           '<h5 style="background-color:grey;color:white;text-align: center;">' +'編號: '+animal.id+'</h5>'+
           '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">性別/品種:</h6><b style="padding-left:5px;font-weight:bold;color:grey;">'+ gender+animal.type+ '</b></div>'+
           '<br><div><h6 style="font-weight:bold;color:#c1c1c1;">名字:</h6>' +'<b style="padding-left:5px;font-weight:bold;color:grey;">'+ animal.name +'</b></div>'+

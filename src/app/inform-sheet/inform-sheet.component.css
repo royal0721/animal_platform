@@ -27,7 +27,7 @@ input#location_added_addr,input#location_added_long{
 	margin-left: 5px;
 	margin-top: 5px;
 }
-#addr_text,#type_text,#gender_text,#name_text,#informer_id_text{
+#addr_text,#type_text,#gender_text,#feeder_text,#name_text,#informer_id_text{
 	color: #000000;
 	font-weight: 700;
 	padding: 13px 10px ;
@@ -47,7 +47,7 @@ input#location_added_addr,input#location_added_long{
 	height: 99vh;
 	overflow: auto;
 }
-#address,#type,#gender,#name,#informer_id{
+#address,#type,#gender,#feeder,#name,#informer_id{
 	padding:0px 12px;
 }
 .inform_text{
@@ -74,9 +74,6 @@ input#location_added_addr,input#location_added_long{
 }
 #confirm_button[disabled]{
 	background-color: rgb(173, 173, 173);
-}
-input[radio]:checked{
-	background-color: rgb(117, 117, 117);
 }
 select{
  height: 37px;
