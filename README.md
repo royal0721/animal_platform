@@ -1,6 +1,6 @@
 # TNR 流浪動物通報系統
 # 網址：(目前正在開發動保團體後台管理功能，所以網頁不對外開放)
-### 目地： 為了改善現在流浪動物通報團體交流的方法。
+### 目的： 為了改善現在流浪動物通報團體交流的方法。
 
 ### 執行前請先修改成自身申請API KEY
 ![image](https://raw.githubusercontent.com/royal0721/animal_platform/master/sc_test.png)
