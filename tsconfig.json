@@ -10,15 +10,11 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2015",
+    "target": "ES2022",
     "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "types": [
-      "googlemaps"
-]
-
-  }
+    "skipLibCheck": true,
+    "lib": ["es2018", "dom"],
+    "typeRoots": ["node_modules/@types", "googlemaps"],
+    "useDefineForClassFields": false,
+  },
 }

@@ -1,68 +1,288 @@
-<body style="background-color: rgb(247, 247, 247);">
-<div class="nav" style="height:90px;background-color:#9e9e9e;">
-    <button backButton class="btn btn-secondary" id="back-btn" style="position: absolute;margin-top: 25px;margin-bottom: 10px;margin-left: 30px;" (click)="goHome()" >回通報首頁</button>
-    <button class="btn btn-dark" id="logout-btn" style="position: absolute;margin-top: 25px;margin-bottom: 10px;margin-left: 30px;right:50px;" (click)="logout();">登出</button>
-</div>
-<div class="container mw-100" style="padding-top: 30px;">
+<body style="background-color: rgb(247, 247, 247)">
+  <div class="nav" style="height: 90px; background-color: #9e9e9e">
+    <button
+      backButton
+      class="btn btn-secondary"
+      id="back-btn"
+      style="
+        position: absolute;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        margin-left: 30px;
+      "
+      (click)="goHome()"
+    >
+      回通報首頁
+    </button>
+    <button
+      class="btn btn-dark"
+      id="logout-btn"
+      style="
+        position: absolute;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        margin-left: 30px;
+        right: 50px;
+      "
+      (click)="logout()"
+    >
+      登出
+    </button>
+  </div>
+  <div class="container mw-100" style="padding-top: 30px">
     <div class="row">
-        <div class="col d-flex align-items-start flex-column" style="background-color:white;border:#ededed 0.02px solid;border-radius:5px;padding:20px;margin:15px 30px;box-shadow:  0 0 10px #cfcfcf">
-            <button class="btn btn-outline-secondary" style="margin: 15px 30px;" (click)="goAdmin();">動物通報管理</button>
-            <button class="btn btn-outline-secondary" style="margin: 15px 30px;">動物編號管理</button>
-            <button class="btn btn-outline-secondary" style="margin: 15px 30px;">任務分配管理</button>
-            <button class="btn btn-outline-secondary" style="margin: 15px 30px;" (click)="goCheckMember();">職位分配管理</button>
+      <div
+        class="col d-flex align-items-start flex-column"
+        style="
+          background-color: white;
+          border: #ededed 0.02px solid;
+          border-radius: 5px;
+          padding: 20px;
+          margin: 15px 30px;
+          box-shadow: 0 0 10px #cfcfcf;
+        "
+      >
+        <button
+          class="btn btn-outline-secondary"
+          style="margin: 15px 30px"
+          (click)="goAdmin()"
+        >
+          動物通報管理
+        </button>
+        <button class="btn btn-outline-secondary" style="margin: 15px 30px">
+          動物編號管理
+        </button>
+        <button class="btn btn-outline-secondary" style="margin: 15px 30px">
+          任務分配管理
+        </button>
+        <button
+          class="btn btn-outline-secondary"
+          style="margin: 15px 30px"
+          (click)="goCheckMember()"
+        >
+          職位分配管理
+        </button>
+      </div>
+      <div
+        class="show_inform col-6"
+        style="
+          background-color: white;
+          border: #ededed 0.02px solid;
+          border-radius: 5px;
+          padding: 20px;
+          margin: 15px;
+          text-align: center;
+          box-shadow: 0 0 10px #cfcfcf;
+        "
+      >
+        <button
+          *ngIf="getDetails"
+          class="btn btn-outline-secondary"
+          style="margin: 5px 5px; position: absolute; right: 20px"
+          (click)="goAdminHome()"
+        >
+          回地區看板
+        </button>
+        <p style="padding-top: 15px; font-size: 20px; font-weight: 600">
+          TNR 動物通報管理
+        </p>
+        <div
+          *ngIf="Loading"
+          class="spinner-border text-dark"
+          role="status"
+          style="margin-top: 60px"
+        >
+          <span class="sr-only">Loading...</span>
         </div>
-        <div class="show_inform col-6" style="background-color:white;border:#ededed 0.02px solid;border-radius:5px;padding:20px;margin:15px;text-align: center;box-shadow:  0 0 10px #cfcfcf">
-            <button *ngIf="getDetails" class="btn btn-outline-secondary" style="margin: 5px 5px;position: absolute;right:20px;" (click)="goAdminHome();">回地區看板</button>
-            <p style="padding-top: 15px;font-size: 20px;font-weight: 600;">TNR 動物通報管理</p>
-            <div *ngIf="Loading" class="spinner-border text-dark" role="status" style="margin-top: 60px;">
-                <span class="sr-only">Loading...</span>
+        <span *ngIf="Loading" style="padding-left: 20px; font-size: 20px"
+          >連接數據中，請稍等</span
+        >
+        <div *ngIf="!getDetails" class="row">
+          <div
+            *ngFor="let inform of formatted_inform"
+            class="col"
+            style="
+              background-color: white;
+              border: #ededed 0.02px solid;
+              margin: 15px;
+              height: 100%;
+            "
+          >
+            <div style="padding: 10px; font-weight: 700">{{ inform.area }}</div>
+            <div *ngFor="let count of inform.counts" style="text-align: left">
+              <div style="display: flex; height: 50px">
+                <div style="margin: 10px 20px 10px 10px">{{ count.id }}</div>
+                <button
+                  class="count"
+                  style="
+                    margin: 10px;
+                    align-items: flex-start;
+                    display: inline-flex;
+                  "
+                  (click)="get_details(inform.code + ',' + count.code)"
+                >
+                  {{ count.count }}
+                </button>
+              </div>
             </div>
-            <span *ngIf="Loading"style="padding-left:20px;font-size:20px;">連接數據中，請稍等</span>
-            <div *ngIf="!getDetails" class="row">
-                <div *ngFor="let inform of formatted_inform" class="col" style="background-color:white;border:#ededed 0.02px solid;margin:15px;height: 100%;">
-                <div style="padding:10px;font-weight:700;">{{inform.area}}</div>
-                <div *ngFor="let count of inform.counts" style="text-align: left;">
-                    <div style="display: flex;height:50px;">
-                        <div style="margin:10px 20px 10px 10px;">{{count.id}}</div>
-                        <button class="count" style="margin:10px;align-items: flex-start;display: inline-flex;" (click)="get_details(inform.code+','+count.code)">{{count.count}}</button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            <div *ngIf="getDetails" class="row">
-                <div class="animal_photo" *ngFor="let area of area_inform" style="background-color:white;border:#ededed 0.02px solid;margin:15px;height: 100%;box-shadow:  0 0 5px #cfcfcf;border-radius: 5px;">
-                <div style="padding:10px;background-color: #8a8a8a; color:white;border-radius: 5px 5px 0px 0px;font-weight:bold;">編號 {{area.id}}</div>
-                <img style="width:170px;height:150px;padding:10px;" src="data:image/png;base64,{{area.img_url}}" />
-                <div *ngIf="area.gender==0"style="padding:10px;font-weight:bold;">母{{area.type}}</div>
-                <div *ngIf="area.gender==1"style="padding:10px;font-weight:bold;">公{{area.type}}</div>
-                <div *ngIf="area.gender==2"style="padding:10px;font-weight:bold;">未知{{area.type}}</div>
-                <div style="padding:10px;">{{area.address}}{{area.address2}}{{area.address3}}</div>
-                <div style="padding:10px;color:#8a8a8a;">通報時間: {{area.captured_time}}</div>
-                <div style="padding:10px 5px;color:#555454;">處理者: {{area.handler_id}}</div>
-                </div>
-            </div>
-
+          </div>
         </div>
-        <div class="col d-flex align-items-start flex-column" style="background-color:white;border:#ededed 0.02px solid;border-radius:5px;padding:20px;margin:15px 30px;height:120px;box-shadow:  0 0 10px #cfcfcf;font-weight: 600;">
-            <p>{{username}} 您好!</p>
-            <p>職位名稱: {{role}}</p>
+        <div *ngIf="getDetails" class="row">
+          <div
+            class="animal_photo"
+            *ngFor="let area of area_inform"
+            style="
+              background-color: white;
+              border: #ededed 0.02px solid;
+              margin: 15px;
+              height: 100%;
+              box-shadow: 0 0 5px #cfcfcf;
+              border-radius: 5px;
+            "
+          >
+            <div
+              style="
+                padding: 10px;
+                background-color: #8a8a8a;
+                color: white;
+                border-radius: 5px 5px 0px 0px;
+                font-weight: bold;
+              "
+            >
+              編號 {{ area.id }}
+            </div>
+            <img
+              style="width: 170px; height: 150px; padding: 10px"
+              src="data:image/png;base64,{{ area.img_url }}"
+            />
+            <div
+              *ngIf="area.gender == 0"
+              style="padding: 10px; font-weight: bold"
+            >
+              母{{ area.type }}
+            </div>
+            <div
+              *ngIf="area.gender == 1"
+              style="padding: 10px; font-weight: bold"
+            >
+              公{{ area.type }}
+            </div>
+            <div
+              *ngIf="area.gender == 2"
+              style="padding: 10px; font-weight: bold"
+            >
+              未知{{ area.type }}
+            </div>
+            <div style="padding: 10px">
+              {{ area.address }}{{ area.address2 }}{{ area.address3 }}
+            </div>
+            <div style="padding: 10px; color: #8a8a8a">
+              通報時間: {{ area.captured_time }}
+            </div>
+            <div style="padding: 10px 5px; color: #555454">
+              處理者: {{ area.handler_id }}
+            </div>
+          </div>
         </div>
+      </div>
+      <div
+        class="col d-flex align-items-start flex-column"
+        style="
+          background-color: white;
+          border: #ededed 0.02px solid;
+          border-radius: 5px;
+          padding: 20px;
+          margin: 15px 30px;
+          height: 120px;
+          box-shadow: 0 0 10px #cfcfcf;
+          font-weight: 600;
+        "
+      >
+        <p>{{ username }} 您好!</p>
+        <p>職位名稱: {{ role }}</p>
+      </div>
     </div>
     <div class="row">
-        <div class="col d-flex align-items-start flex-column" style="background-color:white;border:#ededed 0.02px solid;border-radius:5px;padding:20px;margin:15px 30px;">
+      <div
+        class="col d-flex align-items-start flex-column"
+        style="
+          background-color: white;
+          border: #ededed 0.02px solid;
+          border-radius: 5px;
+          padding: 20px;
+          margin: 15px 30px;
+        "
+      ></div>
+      <div
+        class="col-6"
+        style="
+          background-color: white;
+          border: #ededed 0.02px solid;
+          border-radius: 5px;
+          padding: 20px;
+          margin: 15px;
+          text-align: center;
+          box-shadow: 0 0 10px #cfcfcf;
+        "
+      >
+        <p style="padding-top: 15px; font-size: 16px">民眾 TNR 動物通報快訊</p>
+        <div
+          id="first_one"
+          style="
+            padding-top: 10px;
+            color: rgb(80, 80, 80);
+            font-weight: 500;
+            display: flex;
+          "
+        >
+          <div id="first_one_animal">尚無資訊</div>
+          <div
+            id="first_one_time"
+            style="
+              color: rgb(170, 170, 170);
+              padding-left: 10px;
+              padding-top: 5px;
+              font-size: 12px;
+            "
+          >
+            ...
+          </div>
         </div>
-        <div class="col-6" style="background-color:white;border:#ededed 0.02px solid;border-radius:5px;padding:20px;margin:15px;text-align: center;box-shadow:  0 0 10px #cfcfcf;">
-            <p style="padding-top: 15px;font-size: 16px;">民眾 TNR 動物通報快訊</p>
-            <div id="first_one" style="padding-top:10px;color: rgb(80, 80, 80);font-weight: 500;display: flex;">
-                <div id="first_one_animal">尚無資訊</div> <div id="first_one_time" style="color:rgb(170, 170, 170);padding-left: 10px;padding-top: 5px; font-size: 12px;">...</div>
-            </div>
-            <div id="second_one" style="padding-top:10px;color: rgb(80, 80, 80);font-weight: 500;display: flex;">
-                <div id="second_one_animal" ></div> <div id="second_one_time" style="color:rgb(170, 170, 170);padding-left: 10px;padding-top: 5px; font-size: 12px;"></div>
-            </div>
+        <div
+          id="second_one"
+          style="
+            padding-top: 10px;
+            color: rgb(80, 80, 80);
+            font-weight: 500;
+            display: flex;
+          "
+        >
+          <div id="second_one_animal"></div>
+          <div
+            id="second_one_time"
+            style="
+              color: rgb(170, 170, 170);
+              padding-left: 10px;
+              padding-top: 5px;
+              font-size: 12px;
+            "
+          ></div>
         </div>
-        <div class="col" style="background-color:white;border:#ededed 0.02px solid;border-radius:5px;padding:20px;margin:15px 30px;text-align: center;box-shadow:  0 0 10px #cfcfcf;">
-            捕犬員通報狗群
-        </div>
+      </div>
+      <div
+        class="col"
+        style="
+          background-color: white;
+          border: #ededed 0.02px solid;
+          border-radius: 5px;
+          padding: 20px;
+          margin: 15px 30px;
+          text-align: center;
+          box-shadow: 0 0 10px #cfcfcf;
+        "
+      >
+        捕犬員通報狗群
+      </div>
     </div>
-</div>
+  </div>
 </body>

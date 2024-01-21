@@ -1,10 +1,10 @@
 {
-    "/inform/*": {
-      "target": "http://localhost:3080",
-      "secure": false,
-      "pathRewrite": {
-        "^/api": ""
-      },
-      "logLevel": "debug"
-    }
+  "/inform/*": {
+    "target": "http://localhost:3080",
+    "secure": false,
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "logLevel": "debug"
   }
+}
